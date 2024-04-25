@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Computermathematik Verfahren</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Brand-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Projects-Grid-images.css') }}">
+</head>
+
+<body style="background: #262626;color: rgb(255,255,255);">
+    <div class="container">
+        <h1 style="margin-top: 30px;text-align: center;border-radius: 11px;font-size: 70px;">Regula-Falsi-Verfahren</h1>
+        <ul style="text-align: left;">
+            <li>latein.:&nbsp;“Regel des Falschen” oder auch Regula duarum falsarum Positionum: “Regel vom zweifachen falschen Ansatz</li>
+            <li>Sind Methoden zur Berechnung von Nullstellen</li>
+        </ul>
+    </div>
+    <div class="container" style="padding-bottom: 15px;">
+        <h1>Primitivform</h1>
+        <p>Start mit 2 Stellen (𝑎<sub>0</sub>, 𝑏<sub>0</sub>), deren Funktionswert 𝑓(𝑎<sub>0</sub>) 𝑢𝑛𝑑 𝑓(𝑏<sub>0</sub>) unterschiedliche Vorzeichen besitzen.<br>Durch Zwischenwertsatz (Satz für die Werteberechnung einer Funktion), welcher Aussagt, dass mindestens eine Nullstelle existiert, wenn 𝑓(𝑎) 𝑢𝑛𝑑 𝑓(𝑏) unterschiedliche Vorzeichen besitzen.<br>Verkleinerung durchIterationsschritte:<br>Schritt k:<br><img src="{{ url_for('static', filename='img/clipboard-image-11.png') }}" style="width: 80%;"><br>Die Nullstelle ist gefunden, wenn&nbsp;<img src="{{ url_for('static', filename='img/clipboard-image-16.png') }}" style="width: auto;height: 24px;">&nbsp;den Wert 0 hat.<br><br>Falls dem nicht so ist wird die Berechnung wie folgt fortgesetzt:</p>
+        <ul>
+            <li style="margin-bottom: 10px;">Falls 𝑓(𝑐<sub>𝑘</sub>) und 𝑓(𝑎<sub>𝑘−1</sub>) die gleichen Vorzeichen besitzen:<br><strong>𝑎𝑘 = 𝑐𝑘,  𝑏𝑘 = 𝑏𝑘−1</strong></li>
+            <li>Falls 𝑓(𝑐<sub>𝑘</sub>) und 𝑓(𝑏<sub>𝑘−1</sub>) die gleichen Vorzeichen besitzen:<br><strong>𝑎𝑘 =&nbsp;𝑎𝑘−1,</strong><span style="color: black;">&nbsp; </span><strong>𝑏𝑘 =&nbsp;𝑐𝑘</strong></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>Verbessertes Verfahren</h1>
+        <p>Für den Fall, dass 𝑓 konkav oder konvex ist im Intervall [𝑎<sub>𝑘</sub>,  𝑏<sub>𝑘</sub>], so bleibt die Intervallgrenze für die weiteren Iterationen stehen, da die zweite Ableitung somit überall im Intervall das gleiche Vorzeichen besitzt und damit die Sekante immer unterhalb bzw. Oberhalb der Funktion liegt. <br>Dadurch konvergiert die andere Intervallgrenze nur noch linear gegen die Lösung. <br><br><strong>Illinios-, Pegasus- und Anderson/Björck-Verfahren </strong><br><br>Die Idee der Verfahren ist: <br>Für den Fall, dass sie die “linke” Intervallgrenze 𝑥<sub>1</sub> nicht verändert, muss man 𝑓(𝑥<sub>1</sub>) mit einem Faktor 0 &lt; 𝑚 &lt; 1 multiplizieren, um somit den Funktionswert an der Stelle 𝑥<sub>1&nbsp;</sub>näher an Null zu bringen. <br><br>Der Abstand zur Nullstelle hat sich im nächsten Schritt entweder verkürzt oder die Nullstelle nähert sich der “rechten” Intervallgrenze und der tatsächlichen Nullstelle im nächsten Schritt.<br><br>Für den 2. Fall werden “rechts” und “links” vertausch und dann für den nächsten Schritt benutzt. Der 2. Fall tritt jedoch irgendwann immer ein, weswegen keine der beiden Intervallgrenzen bis zum Abbruch stehen bleiben werden, dadurch ist die Konvergenz definitiv superlinear. <br><br>Alle Verfahren beinhalten folgenden Algorithmus: <br><br><img src="{{ url_for('static', filename='img/clipboard-image-21.png') }}" style="height: 250px;"><br>∗ (∘,∘) steht hierbei für eine zweistellige, nicht näher<br>spezifizierte sogenannte Boolesche Funktion. <br><br>𝑓<sub>1</sub>,  𝑓<sub>2</sub> 𝑢𝑛𝑑 𝑓<sub>𝑧</sub> sind die Funktionswerte an den<br>Stellen 𝑥<sub>1</sub>, 𝑥<sub>2</sub> 𝑢𝑛𝑑 𝑧. m ist hier der Verkürzungsfaktor. 𝑥<sub>1</sub>,<br> 𝑥<sub>2</sub> sind<br>die Intervallgrenzen aus dem 𝑘 − ten Schritt. 𝜀<sub>𝑥</sub> 𝑢𝑛𝑑 𝜀<sub>𝑓</sub> sind Abbruchgrenzen. <br><br>Damit das Verfahren abbricht und damit ∗ (|𝑥<sub>2 </sub>−<br>𝑥<sub>1</sub>| ≥ 𝜀<sub>𝑥</sub>,  |𝑓<sub>𝑧</sub>|<br>≥ 𝜀<sub>𝑓</sub>) falsch wird, wird im 1. Fall einer der beiden Abbruchgrenzen<br>unterschritten. Im 2. Fall beide Abbruchgrenzen, im 3. Fall lediglich <br><br>𝜀<sub>𝑥</sub> und im 4. Fall 𝜀<sub>𝑓</sub>.<br><br>Die 3 Verfahren haben nur 1 Unterschied, der Verkürzungsfaktor m: <br>Illinois --&gt; 𝑚<sub>𝐼 </sub>= 0,5 <br>Pegasus --&gt;<img src="{{ url_for('static', filename='img/clipboard-image-22.png') }}" style="height: 62px;">&nbsp;&nbsp;<br><br>Anderson/Björck --&gt;&nbsp;<img src="{{ url_for('static', filename='img/clipboard-image-24.png') }}" style="height: 42px;"><br><br>Eine Umsetzung des Pegasus-Verfahrens mit Python könnte folgendermaßen aussehen:</p><code>
+    <pre class="prettyprint lang-python overwrite-background-color" style="background-color: #ffffff; border-radius: 10px; padding:5px">
+import math
+        def pegasus(f, a, b, max_iter=50, tol=1e-200):
+    fa = f(a)
+    fb = f(b)
+    for _ in range(max_iter):
+        c = b - fb * (b - a) / (fb - fa + 1e-100)  # division durch null vermeiden
+        fc = f(c)
+        if abs(fc) < tol:
+            return c
+        a, b, fa, fb = (b, c, fb, fc) if fa * fc > 0 else (a, c, fa, fc)
+    return b 
+
+def nullstellenfunktion(f, a, b, num_intervals=1):
+    interval_size = (b - a) / num_intervals
+    nullstellen = []
+    for i in range(num_intervals):
+        interval_a = a + i * interval_size
+        interval_b = a + (i + 1) * interval_size
+        nullstelle = pegasus(f, interval_a, interval_b)
+        if nullstelle is not None:
+            nullstellen.append(nullstelle)
+
+    return list(set(nullstellen))
+
+def interwall_schaetzen(f, a, b, interval_size=0.1):
+    num_intervals = 0
+    x = a
+    while x < b:
+        slope = abs((f(x+interval_size) - f(x)) / interval_size)
+        num_intervals += max(1, int(slope))
+        x += interval_size
+    return num_intervals
+
+
+"""
+VARIABLEN
+"""
+untere_grenze = -7
+obere_grenze = 7
+
+def f(x):
+    return math.sin(x)
+
+num_intervals = interwall_schaetzen(f, untere_grenze, obere_grenze)
+nullstellen = nullstellenfunktion(f, untere_grenze, obere_grenze, num_intervals)
+
+nullstellen = sorted([nullstelle for nullstelle in nullstellen if untere_grenze <= nullstelle <= obere_grenze])
+
+print(nullstellen)
+    </pre>
+</code>
+        <p>dieses Programm gibt die Liste&nbsp;<code>[-6.283185307179586, -3.141592653589793, 0.0, 3.141592653589793, 6.283185307179586]</code>&nbsp;(-2π, -π, 0, π, 2π) aus, welche tatsächlich Nullstellen der Funktion&nbsp;sin(𝑥) sind.<br><img src="{{ url_for('static', filename='img/clipboard-image-25.png') }}" style="width: 100%;height: auto;"><br><br>Was also würde nun passieren, wenn man als -5 als <code>untere_grenze</code>&nbsp;und 5 als&nbsp;<code>obere_grenze</code>&nbsp;für die Funktion 2*sin(3x) nehme?<br><a class="btn btn-primary" role="button" style="margin-top: 15px;" href="/tryit">Ausprobieren</a></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+
+</html>

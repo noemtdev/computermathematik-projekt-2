@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Computermathematik Verfahren</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Brand-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Projects-Grid-images.css') }}">
+</head>
+
+<body style="background: #262626;color: rgb(255,255,255);">
+    <div class="container">
+        <h1 style="margin-top: 30px;text-align: center;border-radius: 11px;font-size: 70px;">Bisektionsverfahren</h1>
+    </div>
+    <div class="container" style="padding-bottom: 15px;">
+        <h1></h1>
+        <p>Grundlage: Zwischenwertsatz/ Nullstellensatz von Bolzano.<br>·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bernardus Placidus Johann Nepomuk Bolzano<br>·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 5. Oktober 1781 in Prag, Königreich Böhmen<br>·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;† 18. Dezember 1848 ebenda<br>·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;römisch-katholischer Priester, Philosoph und Mathematiker<br><br>Eine stetige streng monoton steigende Funktion&nbsp;<img src="{{ url_for('static', filename='img/clipboard-image-37.png') }}" style="height: 24px;">&nbsp;hat in einem Intervall [ a , b ] genau dann eine Nullstelle, wenn <img src="{{ url_for('static', filename='img/clipboard-image-38.png') }}" style="height: 24px;">&nbsp;und <img src="{{ url_for('static', filename='img/clipboard-image-39.png') }}" style="height: 24px;">&nbsp;ist, bzw. wenn eine Funktion <img src="{{ url_for('static', filename='img/clipboard-image-37.png') }}" style="height: 24px;">&nbsp;im Intervall&nbsp;[ a , b ]&nbsp;streng monoton steigend/fallend ist und im Intervall ein Vorzeichenwechsel der Funktionswerte stattfindet, so hat die Funktion eine Nullstelle im Intervall.<br><br>Für <img src="{{ url_for('static', filename='img/clipboard-image-42.png') }}" style="height: 20px;">&nbsp;und <img src="{{ url_for('static', filename='img/clipboard-image-41.png') }}" style="height: 24px;">&nbsp;wenden wir folgendes Verfahren an, um die Nullstelle einzugrenzen. Nach Halbierung des Intervalls wird je nach Lage des Funktionswertes das neue Teilintervall bestimmt. Dieses enthält die Nullstelle.<br><br>Ablauf:<br>[ a ​, b ​] sei das n-te Teilintervall. Es gelte <img src="{{ url_for('static', filename='img/clipboard-image-27.png') }}" style="height: 24px;">&nbsp;und <img src="{{ url_for('static', filename='img/clipboard-image-28.png') }}" style="height: 24px;">. Wir halbieren das Intervall und setzen:<br><br><img src="{{ url_for('static', filename='img/clipboard-image-29.png') }}" style="height: 100px;"><br><br>Nun unterscheiden wir drei Fälle:<br>Fall 1: &nbsp;<img src="{{ url_for('static', filename='img/clipboard-image-30.png') }}" style="height: 24px;">: Programm ist abgeschlossen.<br>Fall 2: &nbsp;<img src="{{ url_for('static', filename='img/clipboard-image-31.png') }}" style="height: 24px;">: neues Intervall&nbsp;<img src="{{ url_for('static', filename='img/clipboard-image-33.png') }}" style="height: 24px;">.<br>Fall 3: &nbsp;<img src="{{ url_for('static', filename='img/clipboard-image-32.png') }}" style="height: 24px;">: neues Intervall <img src="{{ url_for('static', filename='img/clipboard-image-34.png') }}" style="height: 24px;">.<br><br>Für die Fälle 2 und 3 gilt wieder <img src="{{ url_for('static', filename='img/clipboard-image-35.png') }}" style="height: 24px;">&nbsp;und <img src="{{ url_for('static', filename='img/clipboard-image-36.png') }}" style="height: 24px;">&nbsp;und der Prozess wird wiederholt.<br>Beispiel: Berechnen von √2<br><br><img src="{{ url_for('static', filename='img/clipboard-image-43.png') }}" style="width: 100%;"><br><br>ein Programm, welches das Bisektionsverfahren durchführt, ist unten zu finden.</p><code>
+    <pre class="prettyprint lang-python overwrite-background-color" style="background-color: #ffffff; border-radius: 10px; padding:5px">
+class BisektionsVerfahren:
+    def __init__(self, a:float, b:float, c:float):
+        self.a = a
+        self.b = b 
+        self.c = c
+
+    @classmethod
+    def funktionswert(self, x:float):
+        return self.a*x*x + self.b*x + self.c
+
+    def verfahren(self, iterationen: int, untere_grenze: float, obere_grenze: float) -> list:
+        if self.funktionswert(untere_grenze) > self.funktionswert(obere_grenze):
+            cache = untere_grenze
+            untere_grenze = obere_grenze
+            obere_grenze = cache
+
+        mittelwert = 0
+        naeherungswerte = []
+
+        naeherungswerte = []
+        for i in range(iterationen):
+            mittelwert = (untere_grenze+obere_grenze) / 2
+            string = f"{untere_grenze} {obere_grenze} {mittelwert}"
+            naeherungswerte.append(string)
+            
+            if self.funktionswert(mittelwert) == 0:
+                break
+
+            if self.funktionswert(untere_grenze)*self.funktionswert(obere_grenze) < 0:
+                obere_grenze = mittelwert
+
+            else:
+                untere_grenze = mittelwert
+                
+        return naeherungswerte  
+    </pre>
+</code>
+        <p>man kann nun eine Variable der Klasse <code>BisektionsVerfahren</code>&nbsp;mit den Parametern A, B und C definieren. und mit der Funktion <code>variable.verfahren()</code>&nbsp;mit den geforderten eingaben ausführen.</p><a class="btn btn-primary" role="button" style="margin-top: 15px;" href="/tryit">Ausprobieren</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+
+</html>

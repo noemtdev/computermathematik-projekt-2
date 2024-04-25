@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Computermathematik Verfahren</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Brand-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Projects-Grid-images.css') }}">
+</head>
+
+<body style="background: #262626;color: rgb(255,255,255);">
+    <div class="container">
+        <h1 style="margin-top: 30px;text-align: center;border-radius: 11px;font-size: 70px;">Newton Verfahren</h1>
+    </div>
+    <div class="container" style="padding-bottom: 15px;">
+        <h1></h1>
+        <p>Das Newton-Verfahren ist eine Methode, um Näherungslösungen für Gleichungen zu finden. Es wird oft verwendet, um die Nullstellen einer Funktion zu finden, was bedeutet, die Stellen zu finden, an denen die Funktion den Wert null annimmt. Es ist nach Sir Isaac Newton benannt, einem berühmten Mathematiker und Physiker.<br><br>Hier ist eine Schritt-für-Schritt-Erklärung des Newton-Verfahrens:<br>1. Verstehen der Aufgabe: Angenommen, du hast eine Funktion f(x), und du möchtest wissen, an welcher Stelle x die Funktion den Wert null hat, also f(x) = 0.<br>2. Startpunkt wählen: Du beginnst mit einem Startpunkt <img src="{{ url_for('static', filename='img/clipboard-image-44.png') }}" width="96" height="70" style="height: 24px;width: auto;">&nbsp;einer beliebigen Zahl. Idealerweise sollte dieser Startpunkt in der Nähe der Lösung liegen, aber das ist nicht immer notwendig.<br>3. Berechnung des nächsten Punktes: Um den nächsten Punkt zu berechnen, verwendest du die Ableitung der Funktion f(x). Die Ableitung gibt die Steigung der Funktion an jedem Punkt an. Du berechnest den nächsten Punkt mit der Formel:<br><img src="{{ url_for('static', filename='img/clipboard-image-45.png') }}" style="width: 25%;"><br>4. Wiederholung des Schrittes 3: Du wiederholst diesen Schritt, indem du den so berechneten Punkt x als neuen Startpunkt nimmst und den nächsten Punkt berechnest:<br><img src="{{ url_for('static', filename='img/clipboard-image-46.png') }}" style="width: 25%;"><br>hierbei steht n für den jeweiligen Iterationsschritt.<br><br>5. Überprüfung der Genauigkeit: Du kannst überprüfen, ob deine Näherungslösung genau genug ist, indem du den Wert von f(x) an diesem Punkt betrachtest. Wenn f(x) nahe genug bei null liegt, hast du eine gute Näherung für die Lösung gefunden.<br><br>Ein Beispiel für die Umsetzung in Python (für ganzrationale Funktionen zweiten Grades) würde folgendermaßen aussehen:</p><code>
+    <pre class="prettyprint lang-python overwrite-background-color" style="background-color: #ffffff; border-radius: 10px; padding:5px">
+class NewtonVerfahren:
+    """
+    Berechnung mit quadratischen Funktionen
+    """
+    def __init__(self, a:float, b:float, c:float):
+        self.a = a
+        self.b = b 
+        self.c = c
+
+    def funktionswert(self, x:float):
+        a = self.a
+        b = self.b
+        c = self.c
+        
+        return a*x*x + b*x + c
+
+    def ableitungswert(self, x:float):
+        a = self.a
+        b = self.b
+        c = self.c
+
+        return 2*a*x + b
+    
+    def verfahren(self, iterationen: int, naeherungswert: float) -> list:
+        naeherungswerte = []
+        for i in range(iterationen):
+            naeherungswert = naeherungswert-(
+                self.funktionswert(naeherungswert)/
+                self.ableitungswert(naeherungswert)
+            )
+            naeherungswerte.append(naeherungswert)
+
+        return naeherungswerte
+
+newton = NewtonVerfahren(a=1, b=0, c=-2)
+print(newton.verfahren(20, 3))
+    </pre>
+</code>
+        <p>Um die Funktion zu verändern kann man mehr Variablen im Konstruktor (__init__) definieren, bzw die Funktion einfach überschreiben.<br>Hierbei sollte man nicht vergessen die Ableitung anzupassen.<br>Info: der letzte Wert in der Liste ist der genauste.</p><a class="btn btn-primary" role="button" style="margin-top: 15px;" href="/tryit">Ausprobieren</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Computermathematik Verfahren</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Brand-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Projects-Grid-images.css') }}">
+</head>
+
+<body style="background: #262626;color: var(--bs-body-bg);">
+    <div class="container">
+        <h1 style="margin-top: 30px;text-align: center;border-radius: 11px;margin-bottom: 20px;">Python Interpreter</h1>
+    </div>
+    <div class="container"><p id="console-window" style="color: var(--bs-body-bg);background: var(--bs-emphasis-color);border-radius: 5px;height: auto;padding: 10px;font-family: 'Anonymous Pro', monospace;">Code Ausgabe...</p></div>
+    <div class="container" style="margin-bottom: 5px;margin-top: 5px;"><button class="btn btn-primary" type="button" onclick="loadPegasus()">Pegasus-Verfahren Laden</button><button class="btn btn-primary" type="button" style="margin-left: 5px;" onclick="loadFixpunkt()">Fixpunktsatz Laden</button><button class="btn btn-primary" type="button" style="margin-left: 5px;" onclick="loadBisektion()">Bisektionsverfahren Laden</button><button class="btn btn-primary" type="button" style="margin-left: 5px;" onclick="loadNewton()">Newton Verfahren Laden</button><button class="btn btn-primary" type="button" style="margin-left: 5px;" onclick="fetchCodeOutput()">Ausführen</button></div>
+    <div class="container" style="height: 100vh;"><pre class="prettyprint lang-python overwrite-background-color" style="background-color: #ffffff; height: 70%; padding:10px">
+
+    <textarea style="width: 96%; height: 90%;" autocomplete="off" spellcheck="false" id="code-input"></textarea>
+</pre></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+
+</html>

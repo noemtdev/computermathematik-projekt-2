@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Computermathematik Verfahren</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anonymous+Pro&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navbar-Centered-Brand-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Projects-Grid-images.css') }}">
+</head>
+
+<body style="background: #262626;color: rgb(255,255,255);">
+    <div class="container">
+        <h1 style="margin-top: 30px;text-align: center;border-radius: 11px;font-size: 70px;">Banachscher Fixpunktsatz</h1>
+    </div>
+    <div class="container" style="padding-bottom: 15px;">
+        <h1></h1>
+        <p>Der Fixpunktsatz von Banach ist ein Mathematischer Satz der 1922 von Stefan Banach aufgestellt wurde. Mithilfe dieses Satzes kann man die Existenz von Fixpunkten nachweisen.<br><br>Voraussetzungen:</p>
+        <ul>
+            <li>ein Vollständiger Metrischer Vektorraum</li>
+            <li>eine abgeschlossene Menge M (keine leere Menge)</li>
+            <li>eine Kontraktion</li>
+        </ul>
+        <p><strong>Begriffserklärungen:</strong>- Vollständiger Metrischer Vektorraum:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Vektorraum: Raum der durch Vektoren Beschrieben wird<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Metrischer Raum: Raum in dem zwei Punkte einen nicht Negativen Abstand haben<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Vollständiger Raum: Jede Cauchy-Folge von Elementen dieses Raumes konvergiert<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; Cauchy-Folge: Folge bei der der Abstand von aufeinander folgenden Gliedern immer kleiner wird.<br><br>Kontraktion: Abbildung einer Menge auf sich selbst wobei die Abstände zweier Punkte verringern<br><br><strong>Unter diesen Voraussetzungen gilt:</strong><br>Die Abbildung des Fixpunktes entspricht dem Fixpunkt Bsp.: f(x)=x<br>Jeder Grenzwert für ein Element der Menge M ist der Fixpunkt<br><br><strong>Beispiel:</strong><br>Wurzelfunktion: f(x)=√x<br><br><strong>Voraussetzungen:&nbsp;</strong>Vollständiger Metrischer Vektorraum: kartesisches zweidimensionales Koordinatensystem<br>abgeschlossene Menge M: M=[1,2] (wirdfestgelegt)<br><br>Kontraktion: Im Intervall [1,2] gilt<br> √x&lt;x (Abbildung ist kleiner)<br><br><strong>Iterationsschritte</strong>:<br>√2≈1,4142<br>√1,4142≈1,1892<br>√1,1892≈1,0905<br>...<br>√1=1<br><br>Der Fixpunkt der Funktion √x ist also 1<br><br>Für das gegebene Beispiel sähe ein Programm folgendermaßen aus:<br><br><code>
+    <pre class="prettyprint lang-python overwrite-background-color" style="background-color: #ffffff; border-radius: 10px; padding:5px">
+def f(x):
+    return x**0.5 # hier soll die Funktion definiert werden.
+
+def fixpunkt_berechnen(startwert, toleranz=10e-7, max_iterationen=1000):
+
+    wert = startwert
+    for i in range(max_iterationen):
+        iteration = f(wert)
+        differenz = abs(iteration - wert)
+
+        if differenz < toleranz:
+            return iteration
+
+        wert = iteration
+    return None
+
+fixpunkt = fixpunkt_berechnen(0.1)
+
+if fixpunkt:
+    print(f"Fixpunkt: {fixpunkt}")
+
+else:
+    print("Kein Fixpunkt mit der gegebenen Toleranz und maximalen Menge an iterationen gefunden.")
+    </pre>
+</code></p>
+        <p>Was also wäre also der Fixpunkt der Funktion&nbsp;<span style="color: var(--bs-code-color);">2√3x</span>&nbsp;?</p><a class="btn btn-primary" role="button" style="margin-top: 15px;" href="/tryit">Ausprobieren</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+
+</html>

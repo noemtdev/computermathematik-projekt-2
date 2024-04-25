@@ -19,30 +19,15 @@
     <div class="container py-4 py-xl-5">
         <h2 style="text-align: left;">Einführung (Dennis)</h2><p class="w-lg-50" style="text-align: left;margin-bottom: 50px;">In vielen Bereichen der Wissenschaft<br /> und Technik kommt es vor, dass man Gleichungen lösen muss, die analytisch nicht<br /> oder nur sehr schwer zu lösen sind. In diesen Fällen kann man auf numerische<br /> Verfahren zurückgreifen, die die Lösung der Gleichung mit Hilfe von Computern<br /> ermöglichen.<br /><br />Numerische Verfahren lassen sich in 8<br /> verschiedene Kategorien Gliedern, wobei in dieser Ausarbeitung nur<br /> Verfahren aus der Kategorie der <strong>Nichtlinearen Gleichungssysteme </strong>behandelt werden.<br /><br />- Bisektionsverfahren<br />- Banachscher Fixpunktsatz<br />- Newtonverfahren<br />- Regula Falsi Verfahren<br /><br />Ein Beispiel für ein anderes Verfahren ist das <strong>Heron-Verfahren</strong>, welches für die Annäherung an die Quadratwurzel einer reellen Zahl a (a &gt; 0) verwendet wird.<br /><br />Die Iterationsvorschrift für das<br /> Heron-Verfahren lautet: <img src="{{ url_for('static', filename='img/clipboard-image.png') }}" style="height: 36px;" width="149" height="36" /><br /><br /><img src="{{ url_for('static', filename='img/clipboard-image-2.png') }}" style="height: 24px;" /><span style="color: var(--bs-body-bg);"> steht für den Näherungswert der n-ten Iteration </span>und <img src="{{ url_for('static', filename='img/clipboard-image-3.png') }}" style="height: 24px;" /> steht für den Wert, von dem die Wurzel<br />bestimmt werden soll. <br /><br />Soll also die Wurzel der Zahl 10 bestimmt werden, sähe es so aus: (<img src="{{ url_for('static', filename='img/clipboard-image-4.png') }}" style="height: 24px;" />)<br /><img src="{{ url_for('static', filename='img/clipboard-image-1.png') }}" style="height: 72px;" /><br /><br />Mit Python könnte man das Heron-Verfahren folgendermaßen darstellen, allerdings ist <code>math.sqrt</code> ausreichend, um die Wurzel einer Zahl zu bestimmen.    <code>
     <pre class="prettyprint lang-python overwrite-background-color" style="background-color: #ffffff; border-radius: 10px; padding:5px">
-class NewtonVerfahren:
+class HeronVerfahren:
     """
-    Berechnung mit quadratischen Funktionen
+    Berechnung von Quadratwurzeln
     """
-    def __init__(self, a:float, b:float, c:float):
-        self.a = a
-        self.b = b 
-        self.c = c
-
-    @classmethod
-    def funktionswert(self, x:float):
-        return self.a*x*x + self.b*x + self.c
-
-    @classmethod
-    def ableitungswert(self, x:float):
-        return 2*self.a*x + self.b
-
-    def verfahren(self, iterationen: int, naeherungswert: float) -> list:
+    
+    def verfahren(self, iterationen: int, naeherungswert: float, zahl: float) -> list:
         naeherungswerte = []
         for i in range(iterationen):
-            naeherungswert = naeherungswert-(
-                self.funktionswert(naeherungswert)/
-                self.ableitungswert(naeherungswert)
-            )
+            naeherungswert = 0.5 * (naeherungswert + zahl / naeherungswert)
             naeherungswerte.append(naeherungswert)
 
         return naeherungswerte
